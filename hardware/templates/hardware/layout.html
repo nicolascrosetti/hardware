@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hardware</title>
+        <link href="{% static 'hardware/styles.css' %}" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="{% static 'hardware/favicon.png' %}"/>
+        <meta name="viewport" content="initial-scale=1">
+    </head>
+    <body>
+        <header id="top">
+            <h1><a href="{% url 'index' %}">Hardware</a></h1>
+            <div class="nav-right">
+                <form action="{% url 'search' %}" method="post" class="input-container">
+                    {% csrf_token %}
+                    <input type="text" name="query" class="search-input" placeholder="Buscar..." required>
+                    <button class="search-icon-container" type="submit">
+                        <svg class="search-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </button>
+                </form>
+                <br><br>
+                <ul class="flex">
+                    <li><a href="{% url 'contact' %}">Contacto</a></li>
+                </ul>
+            </div>
+            <ul class="user-menu">
+                {% if user.is_authenticated %}
+                <li>{{ user.username }}</li>
+                <li>|</li>
+                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                <li>|</li>
+                <li><a href="{% url 'signup' %}">Registrarse</a></li>
+            {% endif %}
+            </ul>
+        </header>
+        <div class="categories-navbar">
+            <ul class="flex categories-menu">
+                <a href="{% url 'category' category_name="notebook" %}">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 18H14M7.20003 3H16.8C17.9201 3 18.4802 3 18.908 3.21799C19.2843 3.40973 19.5903 3.71569 19.782 4.09202C20 4.51984 20 5.0799 20 6.2V11.8C20 12.9201 20 13.4802 19.782 13.908C19.5903 14.2843 19.2843 14.5903 18.908 14.782C18.4802 15 17.9201 15 16.8 15H7.20003C6.07992 15 5.51987 15 5.09205 14.782C4.71572 14.5903 4.40976 14.2843 4.21801 13.908C4.00003 13.4802 4.00003 12.9201 4.00003 11.8V6.2C4.00003 5.0799 4.00003 4.51984 4.21801 4.09202C4.40976 3.71569 4.71572 3.40973 5.09205 3.21799C5.51987 3 6.07992 3 7.20003 3ZM4.58888 21H19.4112C20.2684 21 20.697 21 20.9551 20.8195C21.1805 20.6618 21.3311 20.4183 21.3713 20.1462C21.4173 19.8345 21.2256 19.4512 20.8423 18.6845L20.3267 17.6534C19.8451 16.6902 19.6043 16.2086 19.2451 15.8567C18.9274 15.5456 18.5445 15.309 18.1241 15.164C17.6488 15 17.1103 15 16.0335 15H7.96659C6.88972 15 6.35128 15 5.87592 15.164C5.45554 15.309 5.07266 15.5456 4.75497 15.8567C4.39573 16.2086 4.15493 16.6902 3.67334 17.6534L3.1578 18.6845C2.77444 19.4512 2.58276 19.8345 2.6288 20.1462C2.669 20.4183 2.81952 20.6618 3.04492 20.8195C3.30306 21 3.73166 21 4.58888 21Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        <p>Notebooks</p>
+                </a>
+                <p>|</p>
+                <a href="{% url 'category' category_name="tablet" %}">
+                    <svg class="category-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 18H12.01M8.2 21H15.8C16.9201 21 17.4802 21 17.908 20.782C18.2843 20.5903 18.5903 20.2843 18.782 19.908C19 19.4802 19 18.9201 19 17.8V6.2C19 5.0799 19 4.51984 18.782 4.09202C18.5903 3.71569 18.2843 3.40973 17.908 3.21799C17.4802 3 16.9201 3 15.8 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.07989 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.07989 21 8.2 21Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    <p>Tablets</p>
+                </a>
+                <p>|</p>
+                <a href="{% url 'category' category_name="computer" %}">
+                    <svg class="category-icon" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">  .st0{fill:#ffffff;}  </style> <g> <path class="st0" d="M477.984,39.203H34.016C15.219,39.203,0,54.438,0,73.219v283.969c0,18.781,15.219,34.016,34.016,34.016H220 v7.578c0,18.781-15.219,34.016-34.016,34.016H136v40h73.188h93.625H376v-40h-49.984c-18.797,0-34.016-15.234-34.016-34.016v-7.578 h185.984c18.797,0,34.016-15.234,34.016-34.016V73.219C512,54.438,496.781,39.203,477.984,39.203z M464,315.859 c0,6.266-5.078,11.344-11.344,11.344H59.344c-6.266,0-11.344-5.078-11.344-11.344V98.547c0-6.266,5.078-11.344,11.344-11.344 h393.313c6.266,0,11.344,5.078,11.344,11.344V315.859z"></path> </g> </g></svg>
+                    <p>Computadoras</p>
+                </a>
+                <p>|</p>
+                <a href="{% url 'category' category_name="component" %}">
+                    <svg class="category-icon" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs><style>.cls-1{fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:1.91px;}.cls-2{fill:#ffffff;}</style></defs><rect class="cls-1" x="3.41" y="1.5" width="17.18" height="21" rx="1.91"></rect><path class="cls-1" d="M16.77,1.5V13.91a4.77,4.77,0,1,1-9.54,0V10.09l.95-.95V5.32l-.95-1V1.5Z"></path><circle class="cls-1" cx="12" cy="13.91" r="0.95"></circle><circle class="cls-2" cx="6.27" cy="19.64" r="0.95"></circle><circle class="cls-2" cx="17.73" cy="19.64" r="0.95"></circle><line class="cls-1" x1="12" y1="5.32" x2="13.91" y2="5.32"></line></g></svg>
+                    <p>Componentes</p>
+                </a>
+            </ul>
+        </div>
+        <br>
+
+        {% block body %}
+        {% endblock %}
+
+        <script src="{% static 'hardware/script.js' %}"></script>
+    </body>
+</html>
